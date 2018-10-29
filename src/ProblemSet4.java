@@ -21,7 +21,14 @@
 public class ProblemSet4 {
 	
 	public static void main(String[] args) {
-		
+		ProblemSet4 p4 = new ProblemSet4();
+		/* System.out.println(p4.surroundMe("<<>>", "abc"));
+		System.out.println(p4.surroundMe("[[]]", "xyz"));
+		System.out.println(p4.surroundMe("abc", "abc"));
+		System.out.println(p4.surroundMe("(())", "qwerty")); 
+		System.out.println(p4.endsMeet("hello", 2));
+		System.out.println(p4.endsMeet("telephone", 3));
+		System.out.println(p4.endsMeet("mountain", 2)); */
 	}
 	
 	/**
@@ -30,7 +37,7 @@ public class ProblemSet4 {
 	 * 
 	 * Given two Strings, @out and @in, return a new String built by surrounding @in
 	 * with the first and last two characters of @out. Return null if the input
-	 * specifcations are not met.
+	 * specifications are not met.
 	 * 
 	 * @param out - a 4-character String of the format AABB
 	 * @param in - a 3-character String of the format XYZ
@@ -38,7 +45,20 @@ public class ProblemSet4 {
 	 * @return a String constructed from @in and @out of the format AAXYZBB
 	 */
 	
-	// your method signature here
+	//add in format check (AABB and XYZ)
+	public String surroundMe(String out, String in) {
+		String result = " ";
+		int lengthIn = in.length();
+		int lengthOut = out.length();
+		if (lengthOut == 4 && lengthIn == 3) {
+			String pad1 = out.substring(0, 2);
+			String pad2 = out.substring(2, 4);	
+			result = pad1 + in + pad2;
+				return result;
+			} else {
+				return null;
+			}
+	}
 	
 	/**
 	 * @endsMeet is a public method that accepts a String and an integer as input, and
@@ -46,7 +66,7 @@ public class ProblemSet4 {
 	 * 
 	 * Given a String, @str, and an integer, @n, return a new String built by
 	 * combining the first @n and last @n characters of @str. Return null if the input
-	 * specifcations are not met.
+	 * specifications are not met.
 	 * 
 	 * @param str - a String whose length falls in the range [1, 10]
 	 * @param n - an integer no greater than the length of @str
@@ -54,7 +74,18 @@ public class ProblemSet4 {
 	 * @return a String constructed from the first @n and last @n characters of @str
 	 */
 	
-	// your method signature here
+	public String endsMeet(String str, int n) {
+		String result = " ";
+		int lengthStr = str.length();
+		if ((lengthStr > 0 && lengthStr <= 10) && n <= lengthStr) {
+			String firstN = str.substring(0, n);
+			String lastN = str.substring(lengthStr-n, lengthStr);
+			result = firstN + lastN;
+			return result;
+		} else {
+			return null;
+		}
+	}
 	
 	/**
 	 * @middleMan is a public method that accepts a single String as input, and
@@ -69,7 +100,18 @@ public class ProblemSet4 {
 	 * @return a 3-character String constructed from the middle 3 characters of @str
 	 */
 	
-	// your method signature here
+	public String middleMan(String param) {
+		String result = " ";
+		int length = param.length();
+		if (length % 2 == 1) {
+			while (length != 3) {
+				//code
+			}
+			return result;
+		} else {
+			return null;
+		}
+	}
 	
 	/**
 	 * @doubleVision is a public method that accepts a single String as input, and
