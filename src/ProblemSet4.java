@@ -28,7 +28,14 @@ public class ProblemSet4 {
 		System.out.println(p4.surroundMe("(())", "qwerty")); 
 		System.out.println(p4.endsMeet("hello", 2));
 		System.out.println(p4.endsMeet("telephone", 3));
-		System.out.println(p4.endsMeet("mountain", 2)); */
+		System.out.println(p4.endsMeet("mountain", 2)); 
+		System.out.println(p4.middleMan("candy"));
+		System.out.println(p4.middleMan("programming"));
+		System.out.println(p4.middleMan("even"));
+		System.out.println(p4.middleMan("null")); */
+		System.out.println(p4.doubleVision("qwerty"));
+		System.out.println(p4.doubleVision("a"));
+		System.out.println(p4.doubleVision("null"));
 	}
 	
 	/**
@@ -45,7 +52,6 @@ public class ProblemSet4 {
 	 * @return a String constructed from @in and @out of the format AAXYZBB
 	 */
 	
-	//add in format check (AABB and XYZ)
 	public String surroundMe(String out, String in) {
 		String result = " ";
 		int lengthIn = in.length();
@@ -104,8 +110,10 @@ public class ProblemSet4 {
 		String result = " ";
 		int length = param.length();
 		if (length % 2 == 1) {
-			while (length != 3) {
-				//code
+			int offset = ((length % 3) + (((length/3) - 1) * 3)) / 4;
+			result = param.substring((offset+1), (length-offset-1));
+			while (result.length() != 3) {
+				result = result.substring(1, (result.length())-1);
 			}
 			return result;
 		} else {
@@ -126,7 +134,20 @@ public class ProblemSet4 {
 	 * @return a String where each character in @str is duplicated in the format AABBCC
 	 */
 	
-	// your method signature here
+	//Doesn't work
+	public String doubleVision(String param) {
+		String result = " ";
+		String letter = " ";
+		if (param.length() >= 1 && param != "null") {
+			for (int i = 0; i <= param.length(); i++) {
+				letter = param.charAt(i) + "";
+				param.replaceFirst(letter, letter + letter);
+			}
+			return result;
+		} else {
+			return null;
+		}
+	}
 	
 	/**
 	 * @centered is a public method that accepts a single String as input, and
