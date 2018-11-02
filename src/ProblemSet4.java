@@ -32,10 +32,20 @@ public class ProblemSet4 {
 		System.out.println(p4.middleMan("candy"));
 		System.out.println(p4.middleMan("programming"));
 		System.out.println(p4.middleMan("even"));
-		System.out.println(p4.middleMan("null")); */
+		System.out.println(p4.middleMan("null")); 
 		System.out.println(p4.doubleVision("qwerty"));
 		System.out.println(p4.doubleVision("a"));
-		System.out.println(p4.doubleVision("null"));
+		System.out.println(p4.doubleVision("null")); 
+		System.out.println(p4.centered("candy", "and"));
+		System.out.println(p4.centered("programming", "ram"));
+		System.out.println(p4.centered("qwerty", "qwe"));
+		System.out.println(p4.centered("sundae", "nda"));
+		System.out.println(p4.centered("sundae", "und")); */
+		System.out.println(p4.upOrDown(12.7, 'r'));
+		System.out.println(p4.upOrDown(12.2, 'r'));
+		System.out.println(p4.upOrDown(12.7, 'f'));
+		System.out.println(p4.upOrDown(12.2, 'c'));
+		System.out.println(p4.upOrDown(12.7, 'x'));
 	}
 	
 	/**
@@ -127,21 +137,22 @@ public class ProblemSet4 {
 	 * 
 	 * Given a String whose length is at least 1, return a String built from duplicating
 	 * every character from the original String. Return null if the input
-	 * specifcations are not met.
+	 * specifications are not met.
 	 * 
 	 * @param str - a String whose length is at least 1 in the format ABC
 	 * 
 	 * @return a String where each character in @str is duplicated in the format AABBCC
 	 */
 	
-	//Doesn't work
-	public String doubleVision(String param) {
-		String result = " ";
-		String letter = " ";
-		if (param.length() >= 1 && param != "null") {
-			for (int i = 0; i <= param.length(); i++) {
-				letter = param.charAt(i) + "";
-				param.replaceFirst(letter, letter + letter);
+	public String doubleVision(String str) {
+		String result = "";
+		String letter = "";
+		if (str.length() >= 1 && str != "null") {
+			for (int i = 0; i < str.length(); i++) {
+				letter = str.charAt(i) + "";
+				for (int j = 0; j < 2; j++) {
+					result = result + letter;
+				}
 			}
 			return result;
 		} else {
@@ -156,7 +167,7 @@ public class ProblemSet4 {
 	 * Given a String, determine whether or not a target sequence is in the middle of the
 	 * original String. The middle of a String will be defined as follows: the number of
 	 * characters the left and right of the target sequence differ by at most 1. Return
-	 * false if the input specifcations are not met.
+	 * false if the input specifications are not met.
 	 * 
 	 * @param str - a String that contains @target
 	 * @param target - a 3-character String of the format ABC
@@ -164,7 +175,33 @@ public class ProblemSet4 {
 	 * @return true if @target is in the middle of @str and false if it is not
 	 */
 	
-	// your method signature here
+	public boolean centered(String str, String target) {
+		String center = "";
+		String center1 = "";
+		String center2 = "";
+		if (str != null && target != null && str.length() >= 3 && target.length() == 3) {
+			if (str.length() % 2 == 1) {
+				center = middleMan(str);
+				if (center.equals(target)) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				int removal = (str.length() / 2) - 2;
+				center = str.substring(removal, str.length()-removal);
+				center1 = center.substring(0,3);
+				center2 = center.substring(1,4);
+				if (center1.equals(target) || center2.equals(target)) {
+					return true;
+				} else {
+					return false;
+				}
+			} 
+		} else {
+			return false;
+		}
+	}
 	
 	/**
 	 * @upOrDown is a public method that accepts a decimal value and a character as
@@ -180,7 +217,22 @@ public class ProblemSet4 {
 	 * @return the result of the operation as an @int
 	 */
 	
-	// your method signature here
+	public int upOrDown(double number, char operation) {
+		int result = 0;
+		switch (operation) {
+		case 'r':
+			result = (int) Math.round(number);
+			return result;
+		case 'f':
+			result = (int) Math.floor(number);
+			return result;
+		case 'c':
+			result = (int) Math.ceil(number);
+			return result;
+		default:
+			return -1;
+		}
+	}
 	
 	/**
 	 * @countMe is a public method that accepts a String and a character as input,
@@ -198,7 +250,21 @@ public class ProblemSet4 {
 	 * @return the number of words in @text that end with @end
 	 */
 	
-	// your method signature here
+	public int countMe(String text, char end) {
+		if (text != null && isAlphabet(end)) {
+			//text.indexOf();
+		} else {
+			return -1;
+		}
+	}
+	
+	public boolean isAlphabet(char letter) {
+		if ((letter >= 'a' && letter <= 'z') || (letter >= 'A' && letter <= 'Z')) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 	/**
 	 * @isNotEqual is a public method that accepts a String as input, and
