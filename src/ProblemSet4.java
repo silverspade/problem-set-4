@@ -22,30 +22,16 @@ public class ProblemSet4 {
 	
 	public static void main(String[] args) {
 		ProblemSet4 p4 = new ProblemSet4();
-		/* System.out.println(p4.surroundMe("<<>>", "abc"));
 		System.out.println(p4.surroundMe("[[]]", "xyz"));
-		System.out.println(p4.surroundMe("abc", "abc"));
-		System.out.println(p4.surroundMe("(())", "qwerty")); 
-		System.out.println(p4.endsMeet("hello", 2));
-		System.out.println(p4.endsMeet("telephone", 3));
-		System.out.println(p4.endsMeet("mountain", 2)); 
+		/*System.out.println(p4.endsMeet("qwerty", 2));
 		System.out.println(p4.middleMan("candy"));
-		System.out.println(p4.middleMan("programming"));
-		System.out.println(p4.middleMan("even"));
-		System.out.println(p4.middleMan("null")); 
 		System.out.println(p4.doubleVision("qwerty"));
-		System.out.println(p4.doubleVision("a"));
-		System.out.println(p4.doubleVision("null")); 
 		System.out.println(p4.centered("candy", "and"));
-		System.out.println(p4.centered("programming", "ram"));
-		System.out.println(p4.centered("qwerty", "qwe"));
-		System.out.println(p4.centered("sundae", "nda"));
-		System.out.println(p4.centered("sundae", "und")); */
 		System.out.println(p4.upOrDown(12.7, 'r'));
-		System.out.println(p4.upOrDown(12.2, 'r'));
-		System.out.println(p4.upOrDown(12.7, 'f'));
-		System.out.println(p4.upOrDown(12.2, 'c'));
-		System.out.println(p4.upOrDown(12.7, 'x'));
+		System.out.println(p4.countMe("sample", 'e'));
+		System.out.println(p4.isNotEqual("isnotis"));
+		System.out.println(p4.triplets("abbbccccd"));
+		System.out.println(p4.addMe("a123b456c789", true));*/
 	}
 	
 	/**
@@ -64,16 +50,21 @@ public class ProblemSet4 {
 	
 	public String surroundMe(String out, String in) {
 		String result = " ";
-		int lengthIn = in.length();
-		int lengthOut = out.length();
-		if (lengthOut == 4 && lengthIn == 3) {
-			String pad1 = out.substring(0, 2);
-			String pad2 = out.substring(2, 4);	
-			result = pad1 + in + pad2;
-				return result;
-			} else {
-				return null;
-			}
+		if (out != null && in != null) {
+			int lengthIn = in.length();
+			int lengthOut = out.length();
+			if (lengthOut == 4 && lengthIn == 3) {
+				String pad1 = out.substring(0, 2);
+				String pad2 = out.substring(2, 4);	
+				result = pad1 + in + pad2;
+					return result;
+				} else {
+					return null;
+				}
+		} else {
+			return null;
+		}
+		
 	}
 	
 	/**
@@ -251,8 +242,17 @@ public class ProblemSet4 {
 	 */
 	
 	public int countMe(String text, char end) {
+		int count = 0;
 		if (text != null && isAlphabet(end)) {
-			//text.indexOf();
+			text = text + " ";	
+			for (int i = 0; i < text.length(); i++) {
+				if (text.charAt(i) == ' ' || text.charAt(i) == 9 || text.charAt(i) == 10) {
+					if (text.charAt(i - 1) == end) {
+						count++;
+					}
+				}
+			}
+			return count;
 		} else {
 			return -1;
 		}
@@ -279,7 +279,27 @@ public class ProblemSet4 {
 	 * @return true if the appearances of is == the appearances of not; false otherwise
 	 */
 	
-	// your method signature here
+	public boolean isNotEqual(String str) {
+		int isCount = 0;
+		int notCount = 0;
+		if (str != null) {
+			for (int i = 0; i < str.length(); i++) {
+				if (str.charAt(i) == 'i') {
+					isCount++;
+				}
+				if (str.charAt(i) == 'n') {
+					notCount++;
+				}
+			}
+			if (isCount == notCount) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
 	
 	/**
 	 * @triplets is a public method that accepts a single String as input, and
@@ -295,7 +315,23 @@ public class ProblemSet4 {
 	 * @return the number of triplets in @str
 	 */
 	
-	// your method signature here
+	public int triplets(String str) {
+		int count = 0;
+		if (str != null) {
+			for (int i = 0; i < (str.length() - 2); i++) {
+				if (isAlphabet(str.charAt(i))) {
+					if (str.charAt(i) == str.charAt(i + 1) && str.charAt(i + 1) == str.charAt(i + 2)) {
+						count++;
+					}
+				} else {
+					return -1;
+				}
+			}
+			return count;
+		} else {
+			return -1;
+		}
+	}
 	
 	/**
 	 * @addMe is a public method that accepts a String and a boolean as input, and
@@ -312,5 +348,35 @@ public class ProblemSet4 {
 	 * @return the sum of the digits or numbers as specified by @digits
 	 */
 	
-	// your method signature here
+	public int addMe(String str, boolean digits) {
+		if (str == null) {
+			return -1;
+		}
+		for (int j = 0; j < str.length(); j++) {
+			if (str.charAt(j) == ' ' || str.charAt(j) == 9 || str.charAt(j) == 10) {
+				return -1;
+			}
+		}
+		str = str + ' ';
+		String temp = "0";
+		int sum = 0;			
+		if (digits) {
+			for (int i = 0; i < str.length(); i++) {
+				if (str.charAt(i) >= '0' && str.charAt(i) <= '9') {
+					sum = sum + Integer.parseInt(String.valueOf(str.charAt(i)));
+				}
+			}
+			return sum;
+		} else {
+			for (int i = 0; i < str.length(); i++) {
+				if (str.charAt(i) >= '0' && str.charAt(i) <= '9') {
+					temp = temp + str.charAt(i);
+				} else {
+					sum = sum + Integer.parseInt(String.valueOf(temp));
+					temp = "0";
+				}
+			}
+			return sum;
+		}
+	}
 }
