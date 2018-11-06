@@ -23,15 +23,15 @@ public class ProblemSet4 {
 	public static void main(String[] args) {
 		ProblemSet4 p4 = new ProblemSet4();
 		System.out.println(p4.surroundMe("[[]]", "xyz"));
-		/*System.out.println(p4.endsMeet("qwerty", 2));
+		System.out.println(p4.endsMeet("qwerty", 2));
 		System.out.println(p4.middleMan("candy"));
-		System.out.println(p4.doubleVision("qwerty"));
+		System.out.println(p4.doubleVision("candy"));
 		System.out.println(p4.centered("candy", "and"));
 		System.out.println(p4.upOrDown(12.7, 'r'));
-		System.out.println(p4.countMe("sample", 'e'));
+		System.out.println(p4.countMe("these are just some sample words", 'e'));
 		System.out.println(p4.isNotEqual("isnotis"));
 		System.out.println(p4.triplets("abbbccccd"));
-		System.out.println(p4.addMe("a123b456c789", true));*/
+		System.out.println(p4.addMe("a123b456c789", true));
 	}
 	
 	/**
@@ -83,10 +83,9 @@ public class ProblemSet4 {
 	
 	public String endsMeet(String str, int n) {
 		String result = " ";
-		int lengthStr = str.length();
-		if ((lengthStr > 0 && lengthStr <= 10) && n <= lengthStr) {
+		if ((str != null && str.length() > 0 && str.length() <= 10) && n <= str.length() && n > 0) {
 			String firstN = str.substring(0, n);
-			String lastN = str.substring(lengthStr-n, lengthStr);
+			String lastN = str.substring((str.length()-n), str.length());
 			result = firstN + lastN;
 			return result;
 		} else {
@@ -109,11 +108,11 @@ public class ProblemSet4 {
 	
 	public String middleMan(String param) {
 		String result = " ";
-		int length = param.length();
-		if (length % 2 == 1) {
+		if (param != null && param.length() % 2 == 1) {
+			int length = param.length();
 			int offset = ((length % 3) + (((length/3) - 1) * 3)) / 4;
 			result = param.substring((offset+1), (length-offset-1));
-			while (result.length() != 3) {
+			while (result.length() > 3) {
 				result = result.substring(1, (result.length())-1);
 			}
 			return result;
@@ -138,7 +137,7 @@ public class ProblemSet4 {
 	public String doubleVision(String str) {
 		String result = "";
 		String letter = "";
-		if (str.length() >= 1 && str != "null") {
+		if (str != null && str.length() >= 1) {
 			for (int i = 0; i < str.length(); i++) {
 				letter = str.charAt(i) + "";
 				for (int j = 0; j < 2; j++) {
@@ -283,11 +282,12 @@ public class ProblemSet4 {
 		int isCount = 0;
 		int notCount = 0;
 		if (str != null) {
+			str = str + " ";
 			for (int i = 0; i < str.length(); i++) {
-				if (str.charAt(i) == 'i') {
+				if (str.charAt(i) == 'i' && str.charAt(i + 1) == 's') {
 					isCount++;
 				}
-				if (str.charAt(i) == 'n') {
+				if (str.charAt(i) == 'n' && str.charAt(i + 1) == 'o' && str.charAt(i + 2) == 't') {
 					notCount++;
 				}
 			}
